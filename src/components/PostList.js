@@ -1,5 +1,38 @@
 import { useEffect, useState } from 'react';
 import Switch from 'react-switch';
+import PostListCard from './PostListCard';
+
+const posts = [
+  {
+    _id: '1535wwed',
+    title: 'Post title 1',
+    content:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, at repudiandae quasi fuga necessitatibus laboriosam dolores velit repellat quo labore!',
+    isPublished: false,
+  },
+  {
+    _id: '153dwd7874wed',
+    title: 'Post title 2',
+    content:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, at repudiandae quasi fuga necessitatibus laboriosam dolores velit repellat quo labore!',
+    isPublished: false,
+  },
+  {
+    _id: '159dwedy841',
+    title: 'Post title 3',
+    content:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, at repudiandae quasi fuga necessitatibus laboriosam dolores velit repellat quo labore!',
+    isPublished: false,
+  },
+  {
+    _id: '159dwedy841',
+    title: 'Post title 4',
+    content:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, at repudiandae quasi fuga necessitatibus laboriosam dolores velit repellat quo labore!',
+    isPublished: false,
+  },
+];
+
 const PostList = () => {
   const [scroll, setScroll] = useState();
   const [isPublished, setIsPublished] = useState(false);
@@ -38,87 +71,37 @@ const PostList = () => {
         />
       </div>
 
-      <div className='post__list post__list--unpublished'>
-        <h1 className='post__list__title'>Unpublished Post</h1>
-        <div>
-          <div className='post__card post__card--unpublished'>
-            <h2 className='post__card__title'>Title 1</h2>
-            <p className='post__card__body'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, at repudiandae quasi fuga necessitatibus laboriosam
-              dolores velit repellat quo labore!
-            </p>
-            <div className='post__card__footer'>
-              <button className='button button__status button__status--publish'>
-                Publish
-              </button>
-              <button className='button button__details'>See Details</button>
-            </div>
-          </div>
-          <div className='post__card post__card--unpublished'>
-            <h2 className='post__card__title'>Title 2</h2>
-            <p className='post__card__body'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, at repudiandae quasi fuga necessitatibus laboriosam
-              dolores velit repellat quo labore!
-            </p>
-            <div className='post__card__footer'>
-              <button className='button button__status button__status--publish'>
-                Publish
-              </button>
-              <button className='button button__details'>See Details</button>
-            </div>
-          </div>
-          <div className='post__card post__card--unpublished'>
-            <h2 className='post__card__title'>Title 3</h2>
-            <p className='post__card__body'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, at repudiandae quasi fuga necessitatibus laboriosam
-              dolores velit repellat quo labore!
-            </p>
-            <div className='post__card__footer'>
-              <button className='button button__status button__status--publish'>
-                Publish
-              </button>
-              <button className='button button__details'>See Details</button>
-            </div>
+      {isPublished ? (
+        <div className='post__container post__container--published'>
+          <h1 className='post__container__title'>Published Post</h1>
+          <div className='post__list'>
+            {posts && posts.filter((post) => post.isPublished).length ? (
+              posts
+                .filter((post) => post.isPublished)
+                .map((post) => <PostListCard key={post._id} post={post} />)
+            ) : (
+              <div>
+                <p>No published post yet.</p>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-
-      <div className='post__list post__list--published'>
-        <h1 className='post__list__title'>Published Post</h1>
-        <div>
-          <div className='post__card post__card--published'>
-            <h2 className='post__card__title'>Title 1</h2>
-            <p className='post__card__body'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, at repudiandae quasi fuga necessitatibus laboriosam
-              dolores velit repellat quo labore!
-            </p>
-            <div className='post__card__footer'>
-              <button className='button button__status button__status--unpublish'>
-                Unpublish
-              </button>
-              <button className='button button__details'>See Details</button>
-            </div>
-          </div>
-          <div className='post__card post__card--published'>
-            <h2 className='post__card__title'>Title 2</h2>
-            <p className='post__card__body'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, at repudiandae quasi fuga necessitatibus laboriosam
-              dolores velit repellat quo labore!
-            </p>
-            <div className='post__card__footer'>
-              <button className='button button__status button__status--unpublish'>
-                Unpublish
-              </button>
-              <button className='button button__details'>See Details</button>
-            </div>
+      ) : (
+        <div className='post__container post__container--unpublished'>
+          <h1 className='post__container__title'>Unpublished Post</h1>
+          <div className='post__list'>
+            {posts && posts.filter((post) => !post.isPublished).length ? (
+              posts
+                .filter((post) => !post.isPublished)
+                .map((post) => <PostListCard key={post._id} post={post} />)
+            ) : (
+              <div>
+                <p>No Unpublished post yet.</p>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
       {scroll > 20 ? (
         <button className='button__scroll__top' onClick={goBackUp}>
           <svg
