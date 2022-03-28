@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-
+import Switch from 'react-switch';
 const PostList = () => {
   const [scroll, setScroll] = useState();
+  const [isPublished, setIsPublished] = useState(false);
 
   const scrollHandler = () => {
     setScroll(window.scrollY);
@@ -18,6 +19,25 @@ const PostList = () => {
 
   return (
     <div className='posts'>
+      <div className='switch__published__status'>
+        <label htmlFor='switch__status'>
+          <span>{isPublished ? 'Published Post' : 'Unpublished Post'}</span>
+        </label>
+        <Switch
+          checked={isPublished}
+          onChange={setIsPublished}
+          onColor='#0bb5d8'
+          onHandleColor='#0dcaf0'
+          handleDiameter={30}
+          uncheckedIcon={false}
+          checkedIcon={false}
+          boxShadow='0px 1px 5px rgba(0, 0, 0, 0.6)'
+          activeBoxShadow='0px 0px 1px 10px rgba(0, 0, 0, 0.2)'
+          height={20}
+          width={48}
+        />
+      </div>
+
       <div className='post__list post__list--unpublished'>
         <h1 className='post__list__title'>Unpublished Post</h1>
         <div>
@@ -65,6 +85,7 @@ const PostList = () => {
           </div>
         </div>
       </div>
+
       <div className='post__list post__list--published'>
         <h1 className='post__list__title'>Published Post</h1>
         <div>

@@ -198,6 +198,10 @@ ul {
   background-color: #ffcd38;
 }
 
+.switch__published__status {
+  display: none;
+}
+
 @media screen and (max-width: 790px) {
   .title {
     font-size: 48px;
@@ -216,6 +220,17 @@ ul {
   .nav__link__item:hover,
   .nav__link__item.active {
     border-bottom: 6px solid #fff;
+  }
+
+  .switch__published__status {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .switch__published__status > label {
+    margin-right: 12px;
+    font-size: 18px;
   }
 
   .posts {
