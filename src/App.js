@@ -1,4 +1,5 @@
 import Header from './components/Header';
+import Login from './components/Login';
 import PostList from './components/PostList';
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
     <div>
       <Header />
       <main>
-        <PostList />
+        <Login />
       </main>
     </div>
   );

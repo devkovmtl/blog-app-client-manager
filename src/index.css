@@ -217,6 +217,56 @@ ul {
   width: 175px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+.form__login {
+  margin-top: 64px;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.input-group__label {
+  margin-bottom: 10px;
+}
+
+.input-group__input {
+  border: 2px solid #e8e8e8;
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+.input-group__input--invalid {
+  border-color: #ff0000;
+}
+
+.input-group--invalid-feedback {
+  color: red;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.input__submit {
+  margin-left: auto;
+}
+
+.input__submit:hover {
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+}
+
 @media screen and (max-width: 790px) {
   .title {
     font-size: 48px;
