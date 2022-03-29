@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { SERVER_DEV_URL } from '../constant';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +14,7 @@ const Login = () => {
   const handleUsernameChange = (e) => {
     let newErrors = {
       username: '',
-      submitError: '',
+      submitErrors: '',
     };
     setErrors((prevState) => ({ ...prevState, ...newErrors }));
     setUsername(e.target.value);
@@ -21,7 +23,7 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     let newErrors = {
       password: '',
-      submitError: '',
+      submitErrors: '',
     };
     setErrors((prevState) => ({ ...prevState, ...newErrors }));
     setPassword(e.target.value);
@@ -63,8 +65,39 @@ const Login = () => {
       }));
       return;
     }
-    const user = { username, password };
-    console.log(user);
+    const userData = { username, password };
+
+    try {
+      const response = await axios.post(
+        SERVER_DEV_URL + 'auth/login',
+        userData,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      console.log(response.data);
+      if (response.data.token) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('token', JSON.stringify(response.data.token));
+        // navigate to home
+      } else {
+        updatedErrors = {
+          submitErrors: 'Error. Try Again',
+        };
+        setErrors((prevState) => ({
+          ...prevState,
+          ...updatedErrors,
+        }));
+      }
+    } catch (error) {
+      updatedErrors = {
+        submitErrors: 'Invalid credentials',
+      };
+      setErrors((prevState) => ({
+        ...prevState,
+        ...updatedErrors,
+      }));
+    }
   };
 
   return (
@@ -126,7 +159,11 @@ const Login = () => {
             </div>
           )}
         </div>
-
+        {errors.submitErrors ? (
+          <p style={{ textAlign: 'center', fontSize: '14px', color: 'red' }}>
+            {errors.submitErrors}
+          </p>
+        ) : null}
         <input type='submit' value='Submit' className='button input__submit' />
       </form>
     </>
