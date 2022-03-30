@@ -242,7 +242,8 @@ ul {
   margin: 0 auto;
 }
 
-.form__login {
+.form__login,
+.form__post {
   margin-top: 64px;
 }
 
@@ -253,17 +254,32 @@ ul {
   margin-bottom: 14px;
 }
 
+.form__group__switch {
+  flex-direction: row;
+  align-items: center;
+}
+
 .input-group__label {
   margin-bottom: 10px;
 }
+.input-group__label--switch {
+  margin-bottom: 0;
+  margin-right: 24px;
+}
 
-.input-group__input {
+.input-group__input,
+.input-group__textarea {
   border: 2px solid #e8e8e8;
   padding: 8px 12px;
   border-radius: 3px;
 }
 
-.input-group__input--invalid {
+.input-group__label--invalid {
+  color: red;
+}
+
+.input-group__input--invalid,
+.input-group__textarea--invalid {
   border-color: #ff0000;
 }
 
