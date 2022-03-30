@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { SERVER_DEV_URL } from '../constant';
+import UserContent from '../context/UserContext';
 
 const Login = () => {
+  const { saveAuth } = useContext(UserContent);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({
@@ -75,11 +78,9 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       );
-      console.log(response.data);
+
       if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-        // navigate to home
+        saveAuth(response.data);
       } else {
         updatedErrors = {
           submitErrors: 'Error. Try Again',
