@@ -37,8 +37,8 @@ const Login = () => {
     let updatedErrors = {};
     if (!username.trim() && !password.trim()) {
       updatedErrors = {
-        username: 'Username is requried with at least 1 character',
-        password: 'Password is requried with at least 8 characters',
+        username: 'Username is required with at least 1 character',
+        password: 'Password is required with at least 8 characters',
       };
       setErrors((prevState) => ({
         ...prevState,
