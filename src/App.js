@@ -6,6 +6,7 @@ import ProtectedRoute from './helpers/ProtectedRoute';
 import UserIsLoggedIn from './helpers/UserIsLoggedIn';
 import Login from './components/Login';
 import PostList from './components/PostList';
+import AddPost from './components/AddPost';
 
 function App() {
   const { auth, saveAuth, removeAuth } = useAuth();
@@ -23,6 +24,14 @@ function App() {
               element={
                 <ProtectedRoute auth={auth} redirectPath='/login'>
                   <PostList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/add-post'
+              element={
+                <ProtectedRoute auth={auth} redirectPath='/login'>
+                  <AddPost />
                 </ProtectedRoute>
               }
             />

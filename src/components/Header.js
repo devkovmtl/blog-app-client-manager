@@ -1,9 +1,12 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import UserContent from '../context/UserContext';
 
 const Header = () => {
   let navigate = useNavigate();
+  let location = useLocation();
+  const pathName = location.pathname.split('/')[1];
+
   const { auth, removeAuth } = useContext(UserContent);
 
   return (
@@ -17,12 +20,20 @@ const Header = () => {
         <nav>
           <ul className='nav'>
             <li className='nav__link'>
-              <Link to='/' className='nav__link__item active'>
+              <Link
+                to='/'
+                className={`nav__link__item ${pathName === '' ? 'active' : ''}`}
+              >
                 Home
               </Link>
             </li>
             <li className='nav__link'>
-              <Link to='/' className='nav__link__item'>
+              <Link
+                to='/add-post'
+                className={`nav__link__item ${
+                  pathName === 'add-post' ? 'active' : ''
+                }`}
+              >
                 Add Post
               </Link>
             </li>

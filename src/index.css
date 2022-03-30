@@ -283,10 +283,13 @@ ul {
   color: #fff;
 }
 
-@media screen and (max-width: 790px) {
+@media screen and (max-width: 980px) {
   .title {
     font-size: 48px;
   }
+}
+
+@media screen and (max-width: 790px) {
   .nav__link {
     margin-right: 20px;
   }
@@ -318,6 +321,12 @@ ul {
   .post__list {
     flex-wrap: nowrap;
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .title {
+    font-size: 32px;
   }
 }
 
