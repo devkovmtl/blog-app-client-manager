@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import UserContext from './context/UserContext';
 import useAuth from './hooks/useAuth';
 import Header from './components/Header';

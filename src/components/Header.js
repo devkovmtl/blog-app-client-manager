@@ -17,7 +17,6 @@ const Header = () => {
     //   `Days ${days}, Hours ${hours}, Minutes ${minutes}, Seconds ${seconds} Left`
     // );
     const totalLeft = days + hours + minutes + seconds;
-    // console.log(totalLeft);
     if (totalLeft === 0) {
       toast.warn('Your session has expired', {
         position: 'top-center',
