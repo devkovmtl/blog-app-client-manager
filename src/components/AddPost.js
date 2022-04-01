@@ -96,7 +96,7 @@ const AddPost = () => {
       } else {
         setIsLoading(false);
         updatedErrors = {
-          submitErrors: 'Error. Try again.',
+          submitErrors: 'Error. Try again',
         };
         setErrors((prevState) => ({
           ...prevState,
