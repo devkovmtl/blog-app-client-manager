@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import UserContext from './context/UserContext';
 import useAuth from './hooks/useAuth';
 import Header from './components/Header';
@@ -7,6 +8,7 @@ import UserIsLoggedIn from './helpers/UserIsLoggedIn';
 import Login from './components/Login';
 import PostList from './components/PostList';
 import AddPost from './components/AddPost';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { auth, saveAuth, removeAuth, timer } = useAuth();
@@ -43,6 +45,7 @@ function App() {
             />
           </Routes>
         </main>
+        <ToastContainer />
       </div>
     </UserContext.Provider>
   );

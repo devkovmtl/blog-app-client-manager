@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import UserContent from '../context/UserContext';
 import { getReturnValues } from '../utils/utils';
 
@@ -18,9 +19,18 @@ const Header = () => {
     const totalLeft = days + hours + minutes + seconds;
     // console.log(totalLeft);
     if (totalLeft === 0) {
+      toast.warn('Your session has expired', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
       removeAuth();
     }
-  }, [timer, removeAuth]);
+  }, [timer]);
 
   return (
     <header>
