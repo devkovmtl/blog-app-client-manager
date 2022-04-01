@@ -163,6 +163,10 @@ ul {
   margin-bottom: 12px;
 }
 
+.post__list__card__title:hover {
+  cursor: pointer;
+}
+
 .post__list__card__body {
   font-size: 16px;
   line-height: 24px;
