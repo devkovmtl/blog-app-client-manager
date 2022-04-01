@@ -8,6 +8,7 @@ import UserIsLoggedIn from './helpers/UserIsLoggedIn';
 import Login from './components/Login';
 import PostList from './components/PostList';
 import AddPost from './components/AddPost';
+import PostDetails from './components/PostDetails';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -24,6 +25,14 @@ function App() {
               element={
                 <ProtectedRoute auth={auth} redirectPath='/login'>
                   <PostList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path=':postId'
+              element={
+                <ProtectedRoute auth={auth} redirectPath='/login'>
+                  <PostDetails />
                 </ProtectedRoute>
               }
             />
