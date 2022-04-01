@@ -1,13 +1,26 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import UserContent from '../context/UserContext';
+import { getReturnValues } from '../utils/utils';
 
 const Header = () => {
   let navigate = useNavigate();
   let location = useLocation();
   const pathName = location.pathname.split('/')[1];
 
-  const { auth, removeAuth } = useContext(UserContent);
+  const { auth, removeAuth, timer } = useContext(UserContent);
+
+  useEffect(() => {
+    const [days, hours, minutes, seconds] = getReturnValues(timer);
+    // console.log(
+    //   `Days ${days}, Hours ${hours}, Minutes ${minutes}, Seconds ${seconds} Left`
+    // );
+    const totalLeft = days + hours + minutes + seconds;
+    // console.log(totalLeft);
+    if (totalLeft === 0) {
+      removeAuth();
+    }
+  }, [timer, removeAuth]);
 
   return (
     <header>

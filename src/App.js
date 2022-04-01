@@ -9,12 +9,10 @@ import PostList from './components/PostList';
 import AddPost from './components/AddPost';
 
 function App() {
-  const { auth, saveAuth, removeAuth } = useAuth();
-
-  console.log(auth);
+  const { auth, saveAuth, removeAuth, timer } = useAuth();
 
   return (
-    <UserContext.Provider value={{ auth, saveAuth, removeAuth }}>
+    <UserContext.Provider value={{ auth, saveAuth, removeAuth, timer }}>
       <div>
         <Header />
         <main>
