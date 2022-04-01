@@ -19,6 +19,23 @@ const PostList = () => {
     window.scrollTo(0, 0);
   };
 
+  const reload = async (bool) => {
+    setIsLoading(bool);
+    try {
+      const response = await axios.get(SERVER_DEV_URL);
+      setIsLoading(false);
+      if (response.data.success) {
+        setPosts([...response.data.posts]);
+      } else {
+        setIsLoading(false);
+        console.log(response.data.message || 'Error fetching the post');
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error || 'Error fetching the post');
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
@@ -77,7 +94,13 @@ const PostList = () => {
                 {posts && posts.filter((post) => post.isPublished).length ? (
                   posts
                     .filter((post) => post.isPublished)
-                    .map((post) => <PostListCard key={post._id} post={post} />)
+                    .map((post) => (
+                      <PostListCard
+                        key={post._id}
+                        post={post}
+                        setIsLoading={reload}
+                      />
+                    ))
                 ) : (
                   <div>
                     <p>No published post yet.</p>
@@ -92,7 +115,13 @@ const PostList = () => {
                 {posts && posts.filter((post) => !post.isPublished).length ? (
                   posts
                     .filter((post) => !post.isPublished)
-                    .map((post) => <PostListCard key={post._id} post={post} />)
+                    .map((post) => (
+                      <PostListCard
+                        key={post._id}
+                        post={post}
+                        setIsLoading={reload}
+                      />
+                    ))
                 ) : (
                   <div>
                     <p>No Unpublished post yet.</p>
