@@ -388,6 +388,29 @@ ul {
   animation-iteration-count: infinite;
 }
 
+.comments__container {
+  width: 420px;
+  margin: auto;
+}
+
+.comment {
+  background: #f8f8f8;
+  margin-bottom: 22px;
+  padding: 12px 24px;
+}
+
+.comment__footer {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button__delete__comment {
+  margin: 20px 0 18px 0;
+}
+
 @media screen and (max-width: 750px) {
   .title {
     font-size: 32px;
