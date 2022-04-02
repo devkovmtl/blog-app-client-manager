@@ -12,6 +12,6 @@ Server api side can be found:
 - [React Switch](https://github.com/markusenglund/react-switch#readme)
 - [React Toastify](https://github.com/fkhadra/react-toastify#readme)
 
-# Images:
+# Project images:
 
 ![login](https://github.com/devkovmtl/blog-app-client-manager/main/images/login.jpg?raw=true)
