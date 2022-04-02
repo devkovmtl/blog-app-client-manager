@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Loader from './Loader';
 import { SERVER_DEV_URL } from '../constant';
 import UserContent from '../context/UserContext';
+import Comment from './Comment';
 
 const PostDetails = () => {
   const { auth } = useContext(UserContent);
@@ -21,6 +22,7 @@ const PostDetails = () => {
     content: '',
     submitErrors: '',
   });
+  const [comments, setComments] = useState([]);
 
   const handleTitleChange = (e) => {
     let newErrors = {
@@ -158,6 +160,53 @@ const PostDetails = () => {
     }
   };
 
+  const deleteComment = async (commentId) => {
+    setIsLoading(true);
+    let updatedErrors = {};
+    try {
+      const response = await axios.delete(
+        SERVER_DEV_URL + 'comments/' + commentId,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+
+      if (response.data.success) {
+        toast.success('Comment deleted!', {
+          position: 'top-center',
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+        setComments([
+          ...comments.filter((comment) => comment._id !== commentId),
+        ]);
+      }
+      updatedErrors = {
+        submitErrors: 'Error. Try again',
+      };
+      setErrors((prevState) => ({
+        ...prevState,
+        ...updatedErrors,
+      }));
+    } catch (error) {
+      updatedErrors = {
+        submitErrors: 'Error. Try again',
+      };
+      setErrors((prevState) => ({
+        ...prevState,
+        ...updatedErrors,
+      }));
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -176,6 +225,7 @@ const PostDetails = () => {
           setTitle(response.data.post.title);
           setContent(response.data.post.content);
           setPublish(response.data.post.isPublished);
+          setComments([...response.data.post.comments]);
         } else {
           console.log(data.message);
         }
@@ -293,6 +343,25 @@ const PostDetails = () => {
               className='button input__submit input__update'
             />
           </form>
+
+          <div>
+            {comments.length ? (
+              <>
+                <h1 style={{ margin: '24px 0' }}>Comments:</h1>
+                <div className='comments__container'>
+                  {comments.map((comment) => (
+                    <Comment
+                      key={comment._id}
+                      comment={comment}
+                      onDeleteComment={deleteComment}
+                    />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p>No Comments posted yet</p>
+            )}
+          </div>
         </div>
       ) : null}
     </>
